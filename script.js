@@ -66,9 +66,9 @@ class VocabularyManager {
   // ── Word management ────────────────────────────────────────────────────
 
   /**
-   * Read input fields, validate, and append a new word entry.
+   * Read input fields, validate, fetch an example sentence, and append a new word entry.
    */
-  addWord() {
+  async addWord() {
     const english = this.englishInput.value.trim();
     const chinese = this.chineseInput.value.trim();
 
@@ -77,16 +77,49 @@ class VocabularyManager {
       return;
     }
 
+    this.addButton.disabled    = true;
+    this.addButton.textContent = 'Loading...';
+
+    const example = await this._fetchExample(english);
+
     this.words.push({
       id:      Date.now(),
       english,
       chinese,
       spelling: english.split('').join(' • '),
+      example,
     });
 
     this._saveWords();
     this._renderWords();
     this._clearInputs();
+
+    this.addButton.disabled    = false;
+    this.addButton.textContent = 'Add Word';
+  }
+
+  /**
+   * Fetch the first available example sentence for a word from the Free Dictionary API.
+   * Returns null if not found or on network error.
+   * @param {string} word
+   * @returns {Promise<string|null>}
+   */
+  async _fetchExample(word) {
+    try {
+      const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word)}`);
+      if (!res.ok) return null;
+      const data = await res.json();
+      for (const entry of data) {
+        for (const meaning of entry.meanings) {
+          for (const def of meaning.definitions) {
+            if (def.example) return def.example;
+          }
+        }
+      }
+      return null;
+    } catch {
+      return null;
+    }
   }
 
   /**
@@ -143,9 +176,16 @@ class VocabularyManager {
     this.words.forEach(word => {
       const el = this.wordTemplate.content.cloneNode(true);
 
-      el.querySelector('.english-word').textContent      = word.english;
-      el.querySelector('.spelling').textContent          = word.spelling;
+      el.querySelector('.english-word').textContent        = word.english;
+      el.querySelector('.spelling').textContent            = word.spelling;
       el.querySelector('.chinese-translation').textContent = word.chinese;
+
+      const exampleEl = el.querySelector('.example-sentence');
+      if (word.example) {
+        exampleEl.textContent = `📖 ${word.example}`;
+      } else {
+        exampleEl.style.display = 'none';
+      }
 
       el.querySelector('.speak-btn').addEventListener('click',  () => this.speakWord(word.english, word.chinese));
       el.querySelector('.delete-btn').addEventListener('click', () => this.deleteWord(word.id));

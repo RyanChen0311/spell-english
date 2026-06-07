@@ -103,6 +103,13 @@ button:hover {
     font-size: 1.1rem;
 }
 
+.example-sentence {
+    color: #6c757d;
+    font-size: 0.85rem;
+    font-style: italic;
+    margin-top: 0.4rem;
+}
+
 .word-actions {
     display: flex;
     gap: 0.5rem;
