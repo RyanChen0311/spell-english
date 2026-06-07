@@ -179,23 +179,23 @@ class VocabularyManager {
     const pause = ms => new Promise(resolve => setTimeout(resolve, ms));
 
     await speak(word);
-    await pause(800);
+    await pause(500);
 
     for (const letter of word.split('')) {
       await speak(letter);
       await pause(100);
     }
 
-    await pause(800);
+    await pause(500);
     await speak(chinese, 'zh-TW');
 
     if (example) {
-      await pause(800);
+      await pause(500);
       await speak(example);
     }
 
     if (exampleZh) {
-      await pause(800);
+      await pause(500);
       await speak(exampleZh, 'zh-TW');
     }
   }
