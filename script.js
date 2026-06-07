@@ -183,7 +183,7 @@ class VocabularyManager {
 
     for (const letter of word.split('')) {
       await speak(letter);
-      await pause(300);
+      await pause(200);
     }
 
     await pause(800);
@@ -235,7 +235,7 @@ class VocabularyManager {
 
   _loadRecord() {
     const name = this.recordList.value;
-    if (!name) { alert('Please select a record to load.'); return; }
+    if (!name) { alert('請選擇一個單字表'); return; }
 
     this.words = [...this.records[name]];
     this._saveWords();
