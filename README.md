@@ -8,7 +8,7 @@
 
 ## Live Demo
 
-👉 https://ryanchen0311.github.io/learn_english_for_resite/
+👉 https://ryanchen0311.github.io/spell-english/
 
 ---
 
