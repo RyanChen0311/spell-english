@@ -105,9 +105,15 @@ button:hover {
 
 .example-sentence {
     color: #6c757d;
-    font-size: 0.85rem;
+    font-size: 1rem;
     font-style: italic;
-    margin-top: 0.4rem;
+    margin-top: 0.5rem;
+}
+
+.example-zh {
+    color: #6c757d;
+    font-size: 1rem;
+    margin-top: 0.15rem;
 }
 
 .word-actions {

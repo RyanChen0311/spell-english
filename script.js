@@ -80,7 +80,8 @@ class VocabularyManager {
     this.addButton.disabled    = true;
     this.addButton.textContent = 'Loading...';
 
-    const example = await this._fetchExample(english);
+    const example   = await this._fetchExample(english);
+    const exampleZh = example ? await this._translateText(example) : null;
 
     this.words.push({
       id:      Date.now(),
@@ -88,6 +89,7 @@ class VocabularyManager {
       chinese,
       spelling: english.split('').join(' • '),
       example,
+      exampleZh,
     });
 
     this._saveWords();
@@ -116,6 +118,24 @@ class VocabularyManager {
           }
         }
       }
+      return null;
+    } catch {
+      return null;
+    }
+  }
+
+  /**
+   * Translate English text to Traditional Chinese via MyMemory API.
+   * @param {string} text
+   * @returns {Promise<string|null>}
+   */
+  async _translateText(text) {
+    try {
+      const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|zh-TW`;
+      const res  = await fetch(url);
+      if (!res.ok) return null;
+      const data = await res.json();
+      if (data.responseStatus === 200) return data.responseData.translatedText;
       return null;
     } catch {
       return null;
@@ -180,11 +200,14 @@ class VocabularyManager {
       el.querySelector('.spelling').textContent            = word.spelling;
       el.querySelector('.chinese-translation').textContent = word.chinese;
 
-      const exampleEl = el.querySelector('.example-sentence');
+      const exampleEl   = el.querySelector('.example-sentence');
+      const exampleZhEl = el.querySelector('.example-zh');
       if (word.example) {
-        exampleEl.textContent = `📖 ${word.example}`;
+        exampleEl.textContent   = word.example;
+        exampleZhEl.textContent = word.exampleZh || '';
       } else {
-        exampleEl.style.display = 'none';
+        exampleEl.style.display   = 'none';
+        exampleZhEl.style.display = 'none';
       }
 
       el.querySelector('.speak-btn').addEventListener('click',  () => this.speakWord(word.english, word.chinese));
