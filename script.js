@@ -165,7 +165,7 @@ class VocabularyManager {
    * @param {string} word     English word to pronounce and spell
    * @param {string} chinese  Chinese translation to read at the end
    */
-  async speakWord(word, chinese) {
+  async speakWord(word, chinese, example = null, exampleZh = null) {
     speechSynthesis.cancel();
 
     const speak = (text, lang = 'en-US') =>
@@ -188,6 +188,16 @@ class VocabularyManager {
 
     await pause(800);
     await speak(chinese, 'zh-TW');
+
+    if (example) {
+      await pause(800);
+      await speak(example);
+    }
+
+    if (exampleZh) {
+      await pause(800);
+      await speak(exampleZh, 'zh-TW');
+    }
   }
 
   // ── Rendering ──────────────────────────────────────────────────────────
@@ -213,7 +223,7 @@ class VocabularyManager {
         exampleZhEl.style.display = 'none';
       }
 
-      el.querySelector('.speak-btn').addEventListener('click',  () => this.speakWord(word.english, word.chinese));
+      el.querySelector('.speak-btn').addEventListener('click',  () => this.speakWord(word.english, word.chinese, word.example, word.exampleZh));
       el.querySelector('.delete-btn').addEventListener('click', () => this.deleteWord(word.id));
 
       this.wordContainer.appendChild(el);
