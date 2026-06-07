@@ -246,7 +246,7 @@ class VocabularyManager {
     const name = this.recordList.value;
     if (!name) { alert('請選擇一個單字表'); return; }
 
-    if (!confirm(`Delete record "${name}"?`)) return;
+    if (!confirm(`刪除單字表「${name}」?`)) return;
 
     delete this.records[name];
     localStorage.setItem('vocabulary_records', JSON.stringify(this.records));
