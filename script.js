@@ -80,7 +80,7 @@ class VocabularyManager {
     }
 
     this.addButton.disabled    = true;
-    this.addButton.textContent = 'Loading...';
+    this.addButton.textContent = '建立中';
 
     const example   = await this._fetchExample(english);
     const exampleZh = example ? await this._translateText(example) : null;
