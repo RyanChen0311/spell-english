@@ -183,7 +183,7 @@ class VocabularyManager {
 
     for (const letter of word.split('')) {
       await speak(letter);
-      await pause(200);
+      await pause(100);
     }
 
     await pause(800);
