@@ -48,7 +48,7 @@ input, select {
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 1rem;
-    min-width: 200px;
+    min-width: 0;
 }
 
 select {
@@ -152,4 +152,64 @@ button:hover {
 
 #loadRecord:hover {
     background-color: #d68910;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+    .container {
+        margin: 1rem auto;
+        padding: 0 0.75rem;
+    }
+
+    h1 {
+        font-size: 1.4rem;
+        margin-bottom: 1.25rem;
+    }
+
+    h2 {
+        font-size: 1.1rem;
+        margin: 1rem 0;
+    }
+
+    .input-section, .record-section {
+        padding: 1rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .input-section, .record-controls {
+        flex-direction: column;
+        gap: 0.6rem;
+    }
+
+    input, select, button {
+        width: 100%;
+    }
+
+    button {
+        padding: 0.75rem 1rem;
+    }
+
+    .word-item {
+        padding: 0.75rem;
+        gap: 0.5rem;
+    }
+
+    .english-word {
+        font-size: 1.05rem;
+    }
+
+    .chinese-translation {
+        font-size: 1rem;
+    }
+
+    .word-actions {
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+
+    .speak-btn, .delete-btn {
+        min-width: 36px;
+        padding: 0.4rem;
+        font-size: 0.9rem;
+    }
 } 
