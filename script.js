@@ -230,7 +230,7 @@ class VocabularyManager {
     localStorage.setItem('vocabulary_records', JSON.stringify(this.records));
     this._updateRecordList();
     this.recordNameInput.value = '';
-    alert(`Record "${name}" saved.`);
+    alert(`「${name}」單字表成功存成`);
   }
 
   _loadRecord() {
@@ -251,7 +251,7 @@ class VocabularyManager {
     delete this.records[name];
     localStorage.setItem('vocabulary_records', JSON.stringify(this.records));
     this._updateRecordList();
-    alert(`Record "${name}" deleted.`);
+    alert(`「${name}」單字表成功刪除`);
   }
 
   _updateRecordList() {
