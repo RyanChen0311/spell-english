@@ -99,7 +99,7 @@ class VocabularyManager {
     this._clearInputs();
 
     this.addButton.disabled    = false;
-    this.addButton.textContent = 'Add Word';
+    this.addButton.textContent = '新增';
   }
 
   /**
