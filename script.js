@@ -75,7 +75,7 @@ class VocabularyManager {
     const chinese = this.chineseInput.value.trim();
 
     if (!english || !chinese) {
-      alert('Please enter both English word and Chinese translation.');
+      alert('請輸入英文單字和中文意思');
       return;
     }
 
@@ -224,7 +224,7 @@ class VocabularyManager {
 
   _saveRecord() {
     const name = this.recordNameInput.value.trim();
-    if (!name) { alert('Please enter a name for the record.'); return; }
+    if (!name) { alert('請輸入單字表名稱'); return; }
 
     this.records[name] = [...this.words];
     localStorage.setItem('vocabulary_records', JSON.stringify(this.records));
@@ -244,7 +244,7 @@ class VocabularyManager {
 
   _deleteRecord() {
     const name = this.recordList.value;
-    if (!name) { alert('Please select a record to delete.'); return; }
+    if (!name) { alert('請選擇一個單字表'); return; }
 
     if (!confirm(`Delete record "${name}"?`)) return;
 
