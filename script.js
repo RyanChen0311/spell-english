@@ -255,7 +255,7 @@ class VocabularyManager {
   }
 
   _updateRecordList() {
-    this.recordList.innerHTML = '<option value="">Select a record</option>';
+    this.recordList.innerHTML = '<option value="">單字表</option>';
     Object.keys(this.records).forEach(name => {
       const opt   = document.createElement('option');
       opt.value   = name;
