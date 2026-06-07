@@ -44,6 +44,8 @@ class VocabularyManager {
     this.wordContainer      = document.getElementById('wordContainer');
     this.wordTemplate       = document.getElementById('word-template');
 
+    this.wordListTitle      = document.getElementById('wordListTitle');
+
     this.recordNameInput    = document.getElementById('recordName');
     this.saveRecordButton   = document.getElementById('saveRecord');
     this.recordList         = document.getElementById('recordList');
@@ -192,6 +194,7 @@ class VocabularyManager {
 
   _renderWords() {
     this.wordContainer.innerHTML = '';
+    this.wordListTitle.style.display = this.words.length ? '' : 'none';
 
     this.words.forEach(word => {
       const el = this.wordTemplate.content.cloneNode(true);
